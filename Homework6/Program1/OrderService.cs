@@ -8,16 +8,30 @@ using System.Xml.Serialization;
 
 namespace Program1
 {
-    class OrderService
+    public class OrderService
     {
         public static int num = 0;
+        public static int index = 0;
         List<Order> Orders = new List<Order>();
+        public List<Order> GetOrders()
+        {
+            return Orders;
+        }
+        public void SetOrders(List<Order> orders)
+        {
+            Orders = orders;
+        }
+
         //添加订单
         public void Add()
         {
+            string[] line = File.ReadAllLines("addtest.txt");
+            //FileStream fs = new FileStream("addtest.txt", FileMode.Open, FileAccess.Read);
+            //StreamReader sr = new StreamReader(fs, Encoding.Default);
+
             Order order = new Order();
             Console.WriteLine("请输入客户姓名:");
-            order.customerName = Console.ReadLine();
+            order.customerName = line[index++];
             num++;
             order.customerNum = num;
 
@@ -28,11 +42,13 @@ namespace Program1
                 Console.Write("请选择需要进行的操作:");
                 try
                 {
-                    int option = int.Parse(Console.ReadLine());
+                    int option = int.Parse(line[index++]);
                     switch (option)
                     {
                         case 1:
+                            order.index2 = index;
                             order.Add();
+                            index = order.index2 + 1;
                             break;
                         case 2:
                             Console.WriteLine("成功添加如下订单:");
@@ -40,6 +56,8 @@ namespace Program1
                             Console.WriteLine("客户:" + order.customerName);
                             order.Show();
                             Orders.Add(order);
+                            order.index2 = 0;
+                            index = 0;
                             return;
                         default:
                             Console.WriteLine("请输入1到2之间的数字！任意键继续");
@@ -68,10 +86,11 @@ namespace Program1
         //删除订单
         public void Remove()
         {
+            string[] line = File.ReadAllLines("removetest.txt");
             try
             {
                 Console.WriteLine("请输入要删除的订单号:");
-                int i = int.Parse(Console.ReadLine());
+                int i = int.Parse(line[0]);
                 if (null == Find(i))
                 {
                     Console.WriteLine("未找到此订单！");
@@ -91,10 +110,11 @@ namespace Program1
         //修改订单
         public void Modify()
         {
+            string[] line = File.ReadAllLines("modifytest.txt");
             try
             {
                 Console.WriteLine("请输入要修改的订单号:");
-                int i = int.Parse(Console.ReadLine());
+                int i = int.Parse(line[index++]);
                 if (null == Find(i))
                 {
                     Console.WriteLine("未找到此订单！");
@@ -109,18 +129,18 @@ namespace Program1
                         Console.WriteLine("1、修改订单");
                         Console.WriteLine("2、放弃修改");
                         Console.Write("请选择需要进行的操作:");
-                        int option = int.Parse(Console.ReadLine());
+                        int option = int.Parse(line[index++]);
                         switch (option)
                         {
                             case 1:
                                 Console.WriteLine("请输入新的客户姓名:");
-                                Find(i).customerName = Console.ReadLine();
+                                Find(i).customerName = line[index++];
                                 while (true)
                                 {
                                     Console.WriteLine("1、修改商品");
                                     Console.WriteLine("2、放弃修改");
                                     Console.Write("请选择需要进行的操作:");
-                                    int option_2 = int.Parse(Console.ReadLine());
+                                    int option_2 = int.Parse(line[index++]);
                                     switch (option_2)
                                     {
                                         case 1:
@@ -131,7 +151,7 @@ namespace Program1
                                                 Console.WriteLine("1、添加商品");
                                                 Console.WriteLine("2、修改完毕");
                                                 Console.Write("请选择需要进行的操作:");
-                                                int option_3 = int.Parse(Console.ReadLine());
+                                                int option_3 = int.Parse(line[index++]);
                                                 switch (option_3)
                                                 {
                                                     case 1:
@@ -143,6 +163,7 @@ namespace Program1
                                                         Console.WriteLine("客户:" + Find(i).customerName);
                                                         Find(i).Show();
                                                         //Orders.Add(Find(i));
+                                                        index = 0;
                                                         return;
                                                     default:
                                                         Console.WriteLine("请输入1到2之间的数字！任意键继续");
@@ -152,6 +173,7 @@ namespace Program1
 
                                             }
                                         case 2:
+                                            index = 0;
                                             return;
                                         default:
                                             Console.WriteLine("请输入1到2之间的数字！任意键继续");
@@ -161,6 +183,7 @@ namespace Program1
 
                                 }
                             case 2:
+                                index = 0;
                                 return;
                             default:
                                 Console.WriteLine("请输入1到2之间的数字！任意键继续");
@@ -195,6 +218,7 @@ namespace Program1
         //查询订单
         public void Query()
         {
+            string[] line = File.ReadAllLines("querytest.txt");
             Console.WriteLine("查询方式:");
             Console.WriteLine("1、订单号");
             Console.WriteLine("2、商品名");
@@ -203,12 +227,12 @@ namespace Program1
             Console.Write("请选择需要进行的操作:");
             try
             {
-                int option = int.Parse(Console.ReadLine());
+                int option = int.Parse(line[index++]);
                 switch (option)
                 {
                     case 1:
                         Console.WriteLine("请输入查询订单的订单号:");
-                        int i = int.Parse(Console.ReadLine());
+                        int i = int.Parse(line[index++]);
                         var m_1 = from order in Orders where order.customerNum == i select order;
                         if (0 != m_1.Count())
                         {
@@ -224,7 +248,7 @@ namespace Program1
                         break;
                     case 2:
                         Console.WriteLine("请输入查询订单的商品名:");
-                        string s1 = Console.ReadLine();
+                        string s1 = line[index++];
                         var m_2 = from order in Orders where order.Find(s1) != null select order;
                         if (0 != m_2.Count())
                         {
@@ -240,7 +264,7 @@ namespace Program1
                         break;
                     case 3:
                         Console.WriteLine("请输入查询订单的客户名:");
-                        string s2 = Console.ReadLine();
+                        string s2 = line[index++];
                         var m_3 = from order in Orders where order.customerName.Equals(s2) select order;
                         if (0 != m_3.Count())
                         {
@@ -278,6 +302,7 @@ namespace Program1
             {
                 Console.WriteLine(e.Message);
             }
+            index = 0;
         }
         //序列化为xml文件
         public void Export(XmlSerializer xmlSerializer,string fileName)

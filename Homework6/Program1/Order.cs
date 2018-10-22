@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,20 @@ namespace Program1
     public class Order
     {
         public string customerName;  //客户名
-        public int customerNum;   //订单号
+        public int customerNum = 0;   //订单号
+
+        public int index2;
 
         public List<OrderDetails> OrderDetails = new List<OrderDetails>();
+
+        public Order() { }
+        public Order(string name, int num, List<OrderDetails> list)
+        {
+            this.customerName = name;
+            this.customerNum = num;
+            this.OrderDetails = list;
+        }
+        string[] line = File.ReadAllLines("addtest.txt");
         //添加商品（订单明细）
         public void Add()
         {
@@ -20,11 +32,11 @@ namespace Program1
             {
                 OrderDetails orderDetail = new OrderDetails();
                 Console.WriteLine("请输入商品名称:");
-                orderDetail.commodityName = Console.ReadLine();
+                orderDetail.commodityName = line[index2++];
                 Console.WriteLine("请输入商品数目:");
-                orderDetail.commodityNum = int.Parse(Console.ReadLine());
+                orderDetail.commodityNum = int.Parse(line[index2++]);
                 Console.WriteLine("请输入商品单价:");
-                orderDetail.commodityPrice = int.Parse(Console.ReadLine());
+                orderDetail.commodityPrice = int.Parse(line[index2]);
                 OrderDetails.Add(orderDetail);
             }
             catch (Exception e)

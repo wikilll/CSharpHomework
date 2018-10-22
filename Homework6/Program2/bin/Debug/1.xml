@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <customerName>wiki</customerName>
+    <customerNum>3</customerNum>
+    <index2>0</index2>
+    <OrderDetails>
+      <OrderDetails>
+        <commodityName>ww</commodityName>
+        <commodityNum>1</commodityNum>
+        <commodityPrice>1</commodityPrice>
+      </OrderDetails>
+    </OrderDetails>
+  </Order>
+</ArrayOfOrder>
