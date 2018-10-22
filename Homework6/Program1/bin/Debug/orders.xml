@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <customerName>wiki</customerName>
+    <customerNum>1</customerNum>
+    <OrderDetails>
+      <OrderDetails>
+        <commodityName>yj</commodityName>
+        <commodityNum>1</commodityNum>
+        <commodityPrice>10</commodityPrice>
+      </OrderDetails>
+      <OrderDetails>
+        <commodityName>www</commodityName>
+        <commodityNum>2</commodityNum>
+        <commodityPrice>20</commodityPrice>
+      </OrderDetails>
+    </OrderDetails>
+  </Order>
+</ArrayOfOrder>
