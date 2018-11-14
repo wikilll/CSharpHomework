@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <OrderDetails>
+      <OrderDetail>
+        <CommodityName>ww</CommodityName>
+        <CommodityNum>1</CommodityNum>
+        <CommodityPrice>10</CommodityPrice>
+      </OrderDetail>
+      <OrderDetail>
+        <CommodityName>www</CommodityName>
+        <CommodityNum>2</CommodityNum>
+        <CommodityPrice>300</CommodityPrice>
+      </OrderDetail>
+    </OrderDetails>
+    <CustomerName>wiki</CustomerName>
+    <CustomerNum>20181115001</CustomerNum>
+  </Order>
+  <Order>
+    <OrderDetails>
+      <OrderDetail>
+        <CommodityName>wi</CommodityName>
+        <CommodityNum>1</CommodityNum>
+        <CommodityPrice>10</CommodityPrice>
+      </OrderDetail>
+      <OrderDetail>
+        <CommodityName>ki</CommodityName>
+        <CommodityNum>2</CommodityNum>
+        <CommodityPrice>300</CommodityPrice>
+      </OrderDetail>
+    </OrderDetails>
+    <CustomerName>wiiiki</CustomerName>
+    <CustomerNum>20181115002</CustomerNum>
+  </Order>
+</ArrayOfOrder>
