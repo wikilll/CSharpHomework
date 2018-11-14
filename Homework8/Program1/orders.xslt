@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:template match="/">
+  <xsl:template match="/ArrayOfOrder">
     <html>
       <head>
         <title>Order System</title>
@@ -8,7 +8,7 @@
       <body>
         <h2>Order System</h2>
         <ul>
-          <xsl:for-each select="ArrayOfOrder/Order">
+          <xsl:for-each select="./Order">
             <li>
               <xsl:value-of select="CustomerNum"/>
               <br/>
@@ -20,7 +20,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
               </tr>
-              <xsl:for-each select="Orderdetails/Orderdetail">
+              <xsl:for-each select="./OrderDetails/OrderDetail">
                 <tr>
                   <td>
                     <xsl:value-of select="CommodityName"/>

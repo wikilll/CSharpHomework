@@ -104,7 +104,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="orders.xslt" />
+    <Content Include="orders.xslt">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
